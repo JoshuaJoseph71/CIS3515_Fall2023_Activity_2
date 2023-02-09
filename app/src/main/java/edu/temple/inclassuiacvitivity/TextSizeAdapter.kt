@@ -18,7 +18,16 @@ class TextSizeAdapter(_context: Context, _textSizes : Array<Int>): BaseAdapter()
     override fun getItemId(p0: Int) = p0.toLong()
 
     override fun getView(p0: Int, p1: View?, p2: ViewGroup?): View {
-        val textView = TextView(context)
+        val textView : TextView
+
+        if(p1 == null){
+            textView = TextView(context)
+            textView.setPadding(10, 20, 20, 20)
+        } else{
+            textView = p1 as TextView
+        }
+
+        textView.textSize = textSizes[p0].toFloat()
         textView.text = textSizes[p0].toString()
 
         return textView
